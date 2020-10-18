@@ -61,8 +61,13 @@ else console.log("Wrong arguments passed");
 
 async function checkFiltertedUrls(json, status) {           //function to receive/apply filters and read url files to check status code
     var ignoredUrl = await readUrlFilter(process.argv[3]);
+
+    if(ignoredUrl.length == 0) console.log(`Invalid ignore patterns, each line of the ignore file text should either be an Url or start with '#' indicating comments.`)
     //read the file with filter applied
-    for (let i = 4; i < process.argv.length; i++){
-        readFile(process.argv[i], false, status, ignoredUrl);
+    else{
+        for (let i = 4; i < process.argv.length; i++){
+            readFile(process.argv[i], false, status, ignoredUrl);
+    }
+    
     }
 }
